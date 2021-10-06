@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Home{% endblock title %}
+
+{% block content %}
+
+<div class="container col-sm-10">
+  <h3 class="alert alert-primary text-center mt-3">Blogs</h3>
+
+  <!-- Show Blogs on Homepage -->
+  {% for post in posts %}
+  <div class="jumbotron jumbotron-fluid jumbo-color">
+    <div class="container">
+      <h1 class="font-weight-bold">{{post.title}}</h1>
+      <p class="lead">{{post.description}}</p>
+    </div>
+  </div>
+  {% endfor %}
+
+</div>
+
+{% endblock content %}

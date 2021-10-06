@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Dashboard{% endblock title %}
+
+{% block msg %}
+<!-- Alert Messages -->
+{% if messages %}
+{% for message in messages %}
+<div {% if message.tags %} class="alert alert-{{message.tags}} alert-dismissible fade show mt-1" role="alert"
+    {% endif %}>
+    <strong>{{message}}</strong>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">×</span>
+    </button>
+</div>
+{% endfor %}
+{% endif %}
+{% endblock msg %}
+
+{% block side %}
+<!-- Side Profile -->
+<div class="col-sm-2 my-5 text-center">
+    <h4 class="alert alert-danger my-4"><i class="fas fa-user"></i>
+        Profile</h4>
+    <h5>{{full_name}}</h5>
+    {% for group in groups %}
+    <p>{{group.name}}</p>
+    {% endfor %}
+</div>
+{% endblock side %}
+
+{% block content %}
+<div class="mb-5 col-sm-10">
+    <!-- <h3 class="mt-3">Dashboard</h3> -->
+    <a href="{% url 'addpost' %}" class="btn btn-success mt-3">
+        <i class="fas fa-plus-square"></i> Add Blog</a>
+    <h4 class="text-center alert alert-info mt-3">Show Blog Information</h4>
+
+    <!-- Showing All Posts to User Dashboard -->
+    {% if posts %}
+    <table class="table table-hover bg-white">
+        <thead>
+            <tr class="text-center">
+                <th scope="col" style="width:2%">ID</th>
+                <th scope="col" style="width:28%">Title</th>
+                <th scope="col" style="width:55%">Description</th>
+                <th scope="col" style="width:15%">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for post in posts %}
+            <tr>
+                <th scope="row">{{post.id}}</th>
+                <td>{{post.title}}</td>
+                <td>{{post.description}}</td>
+
+                <!-- Edit Button -->
+                <td class="text-center">
+                    <a href="{% url 'updatepost' post.id %}" class="btn btn-warning btn-sm"><i
+                            class="fas fa-edit"></i></a>
+
+                <!-- Delete Button -->
+                    {% if perms.blog.delete_post %}
+                    <form action="{% url 'deletepost' post.id %}" method="post" class="d-inline">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger btn-sm"> <i class="fas fa-trash-alt"></i>
+                        </button>
+                    </form>
+                    {% endif %}
+                    
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <h4 class="text-center alert alert-warning">No Records</h4>
+    {% endif %}
+</div>
+{% endblock content %}

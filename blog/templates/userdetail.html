@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Update User | {{request.user}}{% endblock title %}
+
+{% block msg %}
+<!-- Alert Messages -->
+{% if messages %}
+{% for message in messages %}
+<div {% if message.tags %} class="alert alert-{{message.tags}} alert-dismissible fade show mt-1" role="alert"
+    {% endif %}>
+    <strong>{{message}}</strong>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">×</span>
+    </button>
+</div>
+{% endfor %}
+{% endif %}
+{% endblock msg %}
+
+{% block content %}
+<div class="container col-sm-10">
+    <h3 class="alert alert-info text-center mt-3">Update User</h3>
+
+    <!-- Specific User Details Form -->
+    <form action="" method="post" novalidate>
+        {% csrf_token %}
+
+        <div class="form-group">
+            <!-- Form Fields -->
+            {% for fm in form %}
+            <div class="mt-1">{{fm.label_tag}}</div>
+            <small class="text-danger font-weight-bold">
+                {{fm.errors|striptags}}
+            </small>
+            {{fm}}
+            {% endfor %}
+        </div>
+
+        <input class="btn btn-success" type="submit" value="Update user">
+        <a class="btn btn-outline-info mx-2" href="{% url 'dashboard' %}">
+            <i class="fas fa-house-user"></i>
+            Dashboard
+        </a>
+    </form>
+</div>
+
+{% endblock content %}

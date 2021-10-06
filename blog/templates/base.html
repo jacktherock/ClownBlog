@@ -1,0 +1,57 @@
+<!doctype html>
+{% load static %}
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+  {% comment %}
+  <link rel="stylesheet" href="{% static 'css/style.css' %}"> {% endcomment %}
+  <link rel="stylesheet" href="{% static 'css/all.css' %}">
+  <link rel="stylesheet" href="{% static 'css/fontawesome.css' %}">
+
+  <title>{% block title %}{% endblock title %} - Blog</title>
+  <style>
+    {% block style %}
+    {% endblock style %}
+  </style>
+</head>
+
+<body>
+
+  {% include 'navbar.html' %}
+
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        {% block msg %}{% endblock msg %}
+      </div>
+    </div>
+
+    <div class="row">
+      {% block side %}{% endblock side %}
+      {% block content %}{% endblock content %}
+    </div>
+  </div>
+
+
+  <!-- Optional JavaScript; choose one of the two! -->
+
+  <!-- Option 1: Bootstrap Bundle with Popper -->
+  <script src="{% static 'js/bootstrap.js' %}"></script>
+  <script src="{% static 'js/all.js' %}"></script>
+  <script src="{% static 'js/jquery.js' %}"></script>
+  <script src="{% static 'js/fontawesome.js' %}"></script>
+
+  <!-- Option 2: Separate Popper and Bootstrap JS -->
+  <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-W8fXfP3gkOKtndU4JGtKDvXbO53Wy8SZCQHczT5FMiiqmQfUpWbYdTil/SxwZgAN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.min.js" integrity="sha384-skAcpIdS7UcVUC05LJ9Dxay8AXcDYfBJqt1CJ85S/CFujBsIzCIv+l9liuYLaMQ/" crossorigin="anonymous"></script>
+    -->
+</body>
+
+</html>

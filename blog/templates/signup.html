@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}SignUp{% endblock title %}
+
+{% block content %}
+
+<div class="container col-sm-10">
+    <h3 class="alert alert-warning text-center mt-3">Sign-Up</h3>
+
+    <!-- SignUp Form-->
+    <form class="container col-sm-8" action="" method="post" novalidate>
+        {% csrf_token %}
+
+        <!-- Form Fields -->
+        {% for fm in form %}
+        <div class="mt-1">{{fm.label_tag}}</div>
+        <small class="text-danger font-weight-bold">
+            {{fm.errors|striptags}}
+        </small>
+        {{fm}}
+        {% endfor %}
+
+        <input class="btn btn-primary mt-3" type="submit" value="Create Account">
+
+        <!-- Error Form Fields -->
+        {% if form.non_field_errors %}
+        {% for error in form.non_field_errors %}
+        <p class="alert alert-danger my-3">{{error}}</p>
+        {% endfor %}
+        {% endif %}
+
+        <div class="my-2">
+            Already Have an Account ? Please
+            <a href="{% url 'login' %}">Login</a>
+        </div>
+
+    </form>
+</div>
+
+{% endblock content %}

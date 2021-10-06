@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Add Post | {{request.user}}{% endblock title %}
+
+{% block content %}
+<div class="col-sm-10 mt-5">
+    <h3>Dashboard / Add Post</h3>
+
+    <!-- Add Blog Form -->
+    <form action="" method="post" novalidate>
+        {% csrf_token %}
+
+        <!-- Add Blog Fields -->
+        {% for fm in form %}
+        <div class="form-group">
+            {{fm.label_tag}}
+            <small class="text-danger font-weight-bold">
+                {{fm.errors|striptags}}
+            </small>
+            {{fm}}
+        </div>
+        {% endfor %}
+        
+        <input class="btn btn-success" type="submit" value="Add">
+        <a class="btn btn-danger" href="{% url 'dashboard' %}">Cancel</a>
+        <a class="btn btn-outline-info" href="{% url 'dashboard' %}">
+            <i class="fas fa-house-user"></i>
+            Dashboard
+        </a>
+    </form>
+
+</div>
+
+{% endblock content %}
+-
