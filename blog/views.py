@@ -38,7 +38,10 @@ def contact(request):
 # Dasboard (only access when user is login)
 def dashboard(request):
     if request.user.is_authenticated:
-        posts= Post.objects.all()
+        if request.user.is_superuser == True:
+            posts= Post.objects.all()
+        else:
+            posts= Post.objects.filter(user=request.user)
         user = request.user
         full_name = user.get_full_name()
         grps = user.groups.all()
