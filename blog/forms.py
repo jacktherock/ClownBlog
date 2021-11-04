@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.forms import fields, widgets
 from django.utils.translation import gettext, gettext_lazy as _
 from .models import Contact, Post
+from tinymce.widgets import TinyMCE
 
 # SignUp Form - create new user  
 class SignupForm(UserCreationForm):
@@ -42,6 +43,7 @@ class ContactForm(forms.ModelForm):
 
 # Post Form - adding new posts in Post model
 class PostForm(forms.ModelForm):
+    # description = forms.CharField(widget=TinyMCE(attrs={'cols': 80, 'rows': 30}))
     class Meta:
         model = Post
         fields = ['title', 'description']
